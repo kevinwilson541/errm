@@ -1,0 +1,14 @@
+up:
+  sql:
+    CREATE TABLE IF NOT EXISTS test1 (
+      name TEXT PRIMARY KEY,
+      attribute_one INTEGER,
+      attribute_two TEXT
+    );
+  transaction: true
+  timeout: 5000
+down:
+  sql:
+    DROP TABLE IF EXISTS test1;
+  transaction: true
+  timeout: 5000

@@ -1,0 +1,61 @@
+{
+ application,
+ errm,
+ [
+  {description, "Erlang Record Relation Mapping (ERRM) OTP application"},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {mod, {errm_app, []}},
+  {
+   applications,
+   [
+    kernel,
+    stdlib,
+    yamerl
+   ]
+  },
+  {
+   env,
+   [
+    {errm_default_repo_enabled, false},
+    {errm_sup_intensity, 1},
+    {errm_sup_period, 5},
+    {errm_driver_module, errm_sqlite_driver},
+    {errm_driver_init, [":memory:"]},
+    {errm_driver_pool_min, 1},
+    {errm_driver_pool_max, 1},
+    {errm_driver_replica_enabled, false},
+    {errm_driver_replica_init, []},
+    {errm_driver_replica_pool_min, 1},
+    {errm_driver_replica_pool_max, 1},
+    {errm_driver_shutdown, 5000},
+    {errm_migration_schema, "main"},
+    {errm_migration_path, "priv/migrations"},
+    {errm_migration_table, "errm_migrations"},
+    {errm_migration_shutdown, 5000},
+    {errm_seed_schema, "main"},
+    {errm_seed_path, "priv/seeds"},
+    {errm_seed_table, "errm_seeds"},
+    {errm_seed_shutdown, 5000}
+   ]
+  },
+  {
+   modules,
+   [
+    errm,
+    errm_app,
+    errm_changeset,
+    errm_connection,
+    errm_driver,
+    errm_error,
+    errm_gen_driver,
+    errm_migrate,
+    errm_result,
+    errm_seed,
+    errm_sup
+   ]
+  },
+  {licenses, ["Apache 2.0"]},
+  {links, []}
+ ]
+}.

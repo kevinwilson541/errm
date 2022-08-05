@@ -1,0 +1,18 @@
+up:
+  sql:
+    INSERT INTO test1 VALUES
+      ('name1', 'attribute_one', 'attribute_two', 'unique_attr_three_1'),
+      ('name2', 'attribute_one', 'attribute_two', 'unique_attr_three_2'),
+      ('name3', 'attribute_one', 'attribute_two', 'unique_attr_three_3')
+    ON CONFLICT DO NOTHING;
+  transaction: true
+  timeout: 5000
+down:
+  sql:
+    DELETE FROM test1
+    WHERE
+      name='name1' OR
+      name='name2' OR
+      name='name3';
+  transaction: true
+  timeout: 5000

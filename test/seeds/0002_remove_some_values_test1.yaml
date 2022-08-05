@@ -1,0 +1,14 @@
+up:
+  sql:
+    DELETE FROM test1
+    WHERE
+      name='name3';
+  transaction: true
+  timeout: 5000
+down:
+  sql:
+    INSERT INTO test1 VALUES
+      ('name3', 'attribute_one', 'attribute_two', 'unique_attr_three_3')
+    ON CONFLICT DO NOTHING;
+  transaction: true
+  timeout: 5000

@@ -1,0 +1,12 @@
+up:
+  sql:
+    ALTER TABLE test1 ADD COLUMN attribute_three TEXT;
+    CREATE UNIQUE INDEX IF NOT EXISTS UI_0002 ON test1(attribute_three);
+  transaction: true
+  timeout: 6000
+down:
+  sql:
+    DROP INDEX IF EXISTS UI_0002;
+    ALTER TABLE test1 DROP COLUMN attribute_three;
+  transaction: true
+  timeout: 7000
