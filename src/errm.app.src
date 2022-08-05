@@ -48,8 +48,12 @@
     errm_connection,
     errm_driver,
     errm_error,
+    errm_exec_options,
     errm_gen_driver,
     errm_migrate,
+    errm_query_options,
+    errm_repo,
+    errm_repo_sup,
     errm_result,
     errm_seed,
     errm_sup
