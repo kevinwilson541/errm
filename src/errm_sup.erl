@@ -83,8 +83,8 @@ init([]) ->
 
 -spec define_default_repo() -> supervisor:child_spec().
 define_default_repo() ->
-  {ok, SupervisorIntensity} = application:get_env(errm, ?ERRM_SUPERVISOR_INTENSITY),
-  {ok, SupervisorPeriod} = application:get_env(errm, ?ERRM_SUPERVISOR_PERIOD),
+  SupervisorIntensity = application:get_env(errm, ?ERRM_SUPERVISOR_INTENSITY, ?ERRM_REPO_DEFAULT_SUPERVISOR_INTENSITY),
+  SupervisorPeriod = application:get_env(errm, ?ERRM_SUPERVISOR_PERIOD, ?ERRM_REPO_DEFAULT_SUPERVISOR_PERIOD),
 
   % driver config
   {ok, DriverModule} = application:get_env(errm, ?ERRM_DRIVER_MODULE),

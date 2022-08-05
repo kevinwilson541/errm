@@ -50,8 +50,8 @@ init(#errm_repo_init{
 }) ->
   SupFlags = #{
     strategy => one_for_one,
-    intensity => SupIntensity,
-    period => SupPeriod
+    intensity => default_sup_intensity(SupIntensity),
+    period => default_sup_period(SupPeriod)
   },
 
   ReplicaOpts = case default_replica_enabled(ReplicaEnabled) of
@@ -130,6 +130,18 @@ init(#errm_repo_init{
   {ok, {SupFlags, ChildSpecs}}.
 
 % internal functions
+
+-spec default_sup_intensity(N :: pos_integer() | undefined) -> pos_integer().
+default_sup_intensity(undefined) ->
+  ?ERRM_REPO_DEFAULT_SUPERVISOR_INTENSITY;
+default_sup_intensity(N) when is_integer(N), N > 0 ->
+  N.
+
+-spec default_sup_period(N :: pos_integer() | undefined) -> pos_integer().
+default_sup_period(undefined) ->
+  ?ERRM_REPO_DEFAULT_SUPERVISOR_PERIOD;
+default_sup_period(N) when is_integer(N), N > 0 ->
+  N.
 
 -spec default_shutdown(N :: pos_integer() | undefined) -> pos_integer().
 default_shutdown(undefined) ->

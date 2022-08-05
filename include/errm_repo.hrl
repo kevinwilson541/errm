@@ -1,7 +1,7 @@
 
 -record(errm_repo_init, {
-  repo_supervisor_intensity :: pos_integer(),
-  repo_supervisor_period :: pos_integer(),
+  repo_supervisor_intensity :: pos_integer() | undefined,
+  repo_supervisor_period :: pos_integer() | undefined,
   driver_server_name :: atom(),
   driver_module :: atom(),
   driver_args :: [term()],
@@ -24,11 +24,6 @@
   seed_shutdown :: pos_integer() | undefined
 }).
 
-% errm_repo start calls errm_sup to create repo
-% errm_sup creates child of errm_repo_sup to manage driver, migrate, seed servers + create shorthand table
-% errm_repo hits shorthand table to grab name of driver, migrate, seed servers to make subsequent calls with errm_driver, errm_connection, errm_migrate, errm_seed
-% errm_repo stop calls errm_sup to delete repo
-
 -type errm_repo_init() :: #errm_repo_init{}.
 
 -record(errm_repo_state, {
@@ -46,6 +41,8 @@
 
 -type errm_repo_server() :: #errm_repo_server{}.
 
+-define(ERRM_REPO_DEFAULT_SUPERVISOR_INTENSITY, 1).
+-define(ERRM_REPO_DEFAULT_SUPERVISOR_PERIOD, 5000).
 -define(ERRM_REPO_DEFAULT, errm_repo_default).
 -define(ERRM_REPO_DEFAULT_DRIVER, errm_repo_default_driver).
 -define(ERRM_REPO_DEFAULT_MIGRATE, errm_repo_default_migrate).
